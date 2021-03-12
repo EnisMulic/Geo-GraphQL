@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Countries.GraphQL
+namespace Geo.GraphQL
 {
     public class Program
     {
