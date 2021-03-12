@@ -1,5 +1,6 @@
 using Geo.Core;
 using Geo.Database;
+using Geo.GraphQL.City;
 using Geo.GraphQL.Country;
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +31,7 @@ namespace Geo.GraphQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<CountryType>()
-                .AddProjections();
+                .AddType<CityType>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

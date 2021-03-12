@@ -18,7 +18,7 @@ namespace Geo.GraphQL.Country
 
         private class Resolvers
         {
-            public IQueryable<City> GetCity(Domain.Country country, [ScopedService] GeoDbContext context)
+            public IQueryable<Domain.City> GetCity(Domain.Country country, [ScopedService] GeoDbContext context)
             {
                 return context.Cities.Where(i => i.CountryId == country.Id);
             }
