@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Geo.Domain
 {
@@ -7,5 +8,6 @@ namespace Geo.Domain
         public Guid Id { get ; set ; }
         public string Name { get; set; }
         public string Abbreviation { get; set; }
+        public ICollection<City> Cities { get; set; } = new List<City>();
     }
 }

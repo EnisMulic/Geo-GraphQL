@@ -9,9 +9,17 @@ namespace Geo.GraphQL
     public class Query
     {
         [UseDbContext(typeof(GeoDbContext))]
+        [UseProjection]
         public IQueryable<Country> GetCountry([ScopedService] GeoDbContext context)
         {
             return context.Countries;
+        }
+
+        [UseDbContext(typeof(GeoDbContext))]
+        [UseProjection]
+        public IQueryable<City> GetCity([ScopedService] GeoDbContext context)
+        {
+            return context.Cities;
         }
     }
 }
