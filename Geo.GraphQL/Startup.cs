@@ -30,6 +30,7 @@ namespace Geo.GraphQL
 
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
+                .AddMutationType<Mutation>()
                 .AddType<CountryType>()
                 .AddType<CityType>()
                 .AddFiltering()
