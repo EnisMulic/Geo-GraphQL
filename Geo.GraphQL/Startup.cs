@@ -1,7 +1,6 @@
 using Geo.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +23,9 @@ namespace Geo.GraphQL
         {
             services.AddDbContext<GeoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("GeoDatabase")));
+
+            services.AddGraphQLServer()
+                .AddQueryType<Query>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,13 +37,10 @@ namespace Geo.GraphQL
             }
 
             app.UseRouting();
-
+           
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapGraphQL();
             });
         }
     }

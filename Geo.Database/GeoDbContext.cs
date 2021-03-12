@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Geo.Database
 {
-    public class GeoDbContext : DbContext, IGeoDbContext
+    public partial class GeoDbContext : DbContext, IGeoDbContext
     {
         public GeoDbContext(DbContextOptions options) : base(options)
         {
@@ -13,5 +13,12 @@ namespace Geo.Database
 
         public DbSet<Country> Countries { get ; set ; }
         public DbSet<City> Cities { get ; set ; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
