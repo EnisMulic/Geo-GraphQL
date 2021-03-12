@@ -10,7 +10,7 @@ namespace Geo.GraphQL
     {
         [UseDbContext(typeof(GeoDbContext))]
         [UseProjection]
-        public IQueryable<Country> GetCountry([ScopedService] GeoDbContext context)
+        public IQueryable<Domain.Country> GetCountry([ScopedService] GeoDbContext context)
         {
             return context.Countries;
         }

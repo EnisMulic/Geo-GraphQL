@@ -1,5 +1,6 @@
 using Geo.Core;
 using Geo.Database;
+using Geo.GraphQL.Country;
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace Geo.GraphQL
 
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
+                .AddType<CountryType>()
                 .AddProjections();
         }
 
