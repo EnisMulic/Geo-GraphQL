@@ -31,10 +31,12 @@ namespace Geo.GraphQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddMutationType<Mutation>()
+                .AddSubscriptionType<Subscription>()
                 .AddType<CountryType>()
                 .AddType<CityType>()
                 .AddFiltering()
-                .AddSorting();
+                .AddSorting()
+                .AddInMemorySubscriptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,7 @@ namespace Geo.GraphQL
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseWebSockets();
             app.UseRouting();
            
             app.UseEndpoints(endpoints =>

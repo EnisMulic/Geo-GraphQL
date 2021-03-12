@@ -3,6 +3,8 @@ using Geo.GraphQL.City;
 using Geo.GraphQL.Country;
 using HotChocolate;
 using HotChocolate.Data;
+using HotChocolate.Subscriptions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Geo.GraphQL
@@ -10,7 +12,12 @@ namespace Geo.GraphQL
     public class Mutation
     {
         [UseDbContext(typeof(GeoDbContext))]
-        public async Task<AddCountryPayload> AddCountryAsync(AddCountryInput input, [ScopedService] GeoDbContext context)
+        public async Task<AddCountryPayload> AddCountryAsync(
+            AddCountryInput input, 
+            [ScopedService] GeoDbContext context,
+            [Service] ITopicEventSender eventSender,
+            CancellationToken cancellationToken
+        )
         {
             var country = new Domain.Country
             {
@@ -19,7 +26,9 @@ namespace Geo.GraphQL
             };
 
             context.Countries.Add(country);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
+
+            await eventSender.SendAsync(nameof(Subscription.OnCountryAdded), country, cancellationToken);
 
             return new AddCountryPayload(country);
         }
