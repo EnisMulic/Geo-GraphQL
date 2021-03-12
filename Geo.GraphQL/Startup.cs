@@ -1,4 +1,5 @@
 using Geo.Database;
+using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,12 @@ namespace Geo.GraphQL
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL();
+            });
+
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions()
+            {
+                GraphQLEndPoint = "/graphql",
+                Path = "/graphql-voyager"
             });
         }
     }
