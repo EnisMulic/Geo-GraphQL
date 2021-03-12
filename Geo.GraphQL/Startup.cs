@@ -31,7 +31,9 @@ namespace Geo.GraphQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<CountryType>()
-                .AddType<CityType>();
+                .AddType<CityType>()
+                .AddFiltering()
+                .AddSorting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
