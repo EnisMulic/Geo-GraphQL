@@ -1,19 +1,22 @@
-﻿using Geo.Database;
-using Geo.GraphQL.City;
-using Geo.GraphQL.Country;
+﻿using Geo.Contracts.Inputs;
+using Geo.Contracts.Payloads;
+using Geo.Database;
+using Geo.GraphQL.Subscriptions;
 using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Subscriptions;
+using HotChocolate.Types;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Geo.GraphQL
+namespace Geo.GraphQL.Mutations
 {
-    public class Mutation
+    [ExtendObjectType(Name = "Mutation")]
+    public class CountryMutations
     {
         [UseDbContext(typeof(GeoDbContext))]
         public async Task<AddCountryPayload> AddCountryAsync(
-            AddCountryInput input, 
+            AddCountryInput input,
             [ScopedService] GeoDbContext context,
             [Service] ITopicEventSender eventSender,
             CancellationToken cancellationToken
@@ -28,24 +31,9 @@ namespace Geo.GraphQL
             context.Countries.Add(country);
             await context.SaveChangesAsync(cancellationToken);
 
-            await eventSender.SendAsync(nameof(Subscription.OnCountryAdded), country, cancellationToken);
+            await eventSender.SendAsync(nameof(CountrySubscriptions.OnCountryAdded), country, cancellationToken);
 
             return new AddCountryPayload(country);
-        }
-
-        [UseDbContext(typeof(GeoDbContext))]
-        public async Task<AddCityPayload> AddCityAsync(AddCityInput input, [ScopedService] GeoDbContext context)
-        {
-            var city = new Domain.City
-            {
-                Name = input.Name,
-                CountryId = input.CountryId
-            };
-
-            context.Cities.Add(city);
-            await context.SaveChangesAsync();
-
-            return new AddCityPayload(city);
         }
     }
 }

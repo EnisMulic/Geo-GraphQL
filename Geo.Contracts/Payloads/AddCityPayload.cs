@@ -1,4 +1,4 @@
-﻿namespace Geo.GraphQL.City
+﻿namespace Geo.Contracts.Payloads
 {
     public record AddCityPayload(Domain.City City);
    

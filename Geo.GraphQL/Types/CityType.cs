@@ -1,13 +1,14 @@
 ﻿using Geo.Database;
+using Geo.Domain;
 using HotChocolate;
 using HotChocolate.Types;
 using System.Linq;
 
-namespace Geo.GraphQL.City
+namespace Geo.GraphQL.Types
 {
-    public class CityType : ObjectType<Domain.City>
+    public class CityType : ObjectType<City>
     {
-        protected override void Configure(IObjectTypeDescriptor<Domain.City> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<City> descriptor)
         {
             descriptor.Description("Represents Cities");
             descriptor.Field(i => i.Country)
@@ -17,7 +18,7 @@ namespace Geo.GraphQL.City
 
         private class Resolvers
         {
-            public Domain.Country GetCountry(Domain.City city, [ScopedService] GeoDbContext context)
+            public Country GetCountry(City city, [ScopedService] GeoDbContext context)
             {
                 return context.Countries.SingleOrDefault(i => i.Id == city.CountryId);
             }

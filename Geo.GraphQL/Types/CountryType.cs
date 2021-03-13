@@ -4,11 +4,11 @@ using HotChocolate;
 using HotChocolate.Types;
 using System.Linq;
 
-namespace Geo.GraphQL.Country
+namespace Geo.GraphQL.Types
 {
-    public class CountryType : ObjectType<Domain.Country>
+    public class CountryType : ObjectType<Country>
     {
-        protected override void Configure(IObjectTypeDescriptor<Domain.Country> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<Country> descriptor)
         {
             descriptor.Description("Represents Countries");
             descriptor.Field(i => i.Cities)

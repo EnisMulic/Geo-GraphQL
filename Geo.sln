@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geo.GraphQL", "Geo.GraphQL\Geo.GraphQL.csproj", "{0DB6D90D-FE17-4C9D-A4FB-76CE335F02B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo.Core", "Geo.Core\Geo.Core.csproj", "{E8120A5F-BD4F-45B8-B962-417FBAA5E9C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geo.Core", "Geo.Core\Geo.Core.csproj", "{E8120A5F-BD4F-45B8-B962-417FBAA5E9C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo.Domain", "Geo.Domain\Geo.Domain.csproj", "{BE6B3E5F-65C8-4E97-97B5-856A383A2A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geo.Domain", "Geo.Domain\Geo.Domain.csproj", "{BE6B3E5F-65C8-4E97-97B5-856A383A2A65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo.Database", "Geo.Database\Geo.Database.csproj", "{6CD64D1D-61EF-43FE-9CA5-596BACFD00E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geo.Database", "Geo.Database\Geo.Database.csproj", "{6CD64D1D-61EF-43FE-9CA5-596BACFD00E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo.Contracts", "Geo.Contracts\Geo.Contracts.csproj", "{9C6C2B93-977E-486B-AC73-02680AA5E2A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6CD64D1D-61EF-43FE-9CA5-596BACFD00E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CD64D1D-61EF-43FE-9CA5-596BACFD00E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD64D1D-61EF-43FE-9CA5-596BACFD00E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6C2B93-977E-486B-AC73-02680AA5E2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6C2B93-977E-486B-AC73-02680AA5E2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6C2B93-977E-486B-AC73-02680AA5E2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6C2B93-977E-486B-AC73-02680AA5E2A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

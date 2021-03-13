@@ -1,4 +1,4 @@
-﻿namespace Geo.GraphQL.Country
+﻿namespace Geo.Contracts.Inputs
 {
     public record AddCountryInput(string Name, string Abbreviation);
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Geo.GraphQL.City
+namespace Geo.Contracts.Inputs
 {
     public record AddCityInput(string Name, Guid CountryId);
 }

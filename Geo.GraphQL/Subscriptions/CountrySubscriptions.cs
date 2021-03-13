@@ -1,9 +1,10 @@
 ﻿using HotChocolate;
 using HotChocolate.Types;
 
-namespace Geo.GraphQL
+namespace Geo.GraphQL.Subscriptions
 {
-    public class Subscription
+    [ExtendObjectType(Name = "Subscription")]
+    public class CountrySubscriptions
     {
         [Topic]
         [Subscribe]

@@ -1,7 +1,8 @@
-using Geo.Core;
 using Geo.Database;
-using Geo.GraphQL.City;
-using Geo.GraphQL.Country;
+using Geo.GraphQL.Mutations;
+using Geo.GraphQL.Queries;
+using Geo.GraphQL.Subscriptions;
+using Geo.GraphQL.Types;
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +30,14 @@ namespace Geo.GraphQL
                 options.UseSqlServer(Configuration.GetConnectionString("GeoDatabase")));
 
             services.AddGraphQLServer()
-                .AddQueryType<Query>()
-                .AddMutationType<Mutation>()
-                .AddSubscriptionType<Subscription>()
+                .AddQueryType(d => d.Name("Query"))
+                    .AddTypeExtension<CityQueries>()
+                    .AddTypeExtension<CountryQueries>()
+                .AddMutationType(d => d.Name("Mutation"))
+                    .AddTypeExtension<CityMutations>()
+                    .AddTypeExtension<CountryMutations>()
+                .AddSubscriptionType(d => d.Name("Subscription"))
+                    .AddTypeExtension<CountrySubscriptions>()
                 .AddType<CountryType>()
                 .AddType<CityType>()
                 .AddFiltering()
