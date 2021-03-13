@@ -25,7 +25,7 @@ namespace Geo.GraphQL.Mutations
             var country = new Domain.Country
             {
                 Name = input.Name,
-                Abbreviation = input.Abbreviation
+                Alpha2Code = input.Alpha2Code
             };
 
             context.Countries.Add(country);

@@ -18,8 +18,8 @@ namespace Geo.Database
             modelBuilder.Entity<Country>()
                 .HasData
                 (
-                    new Country { Id = BosniaAndHerzegovinaId, Name = "Bosnia and Herzegovina", Abbreviation = "BA" },
-                    new Country { Id = CroatiaId, Name = "Country", Abbreviation = "HR"}
+                    new Country { Id = BosniaAndHerzegovinaId, Name = "Bosnia and Herzegovina", Alpha2Code = "BA" },
+                    new Country { Id = CroatiaId, Name = "Country", Alpha2Code = "HR"}
                 );
 
             var SarajevoId = Guid.NewGuid();
