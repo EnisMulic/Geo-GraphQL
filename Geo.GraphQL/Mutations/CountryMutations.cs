@@ -51,5 +51,18 @@ namespace Geo.GraphQL.Mutations
 
             return new ResponseMessagePayload("Country deleted");
         }
+
+        [UseDbContext(typeof(GeoDbContext))]
+        public async Task<UpdateCountryPayload> UpdateCountryAsync(UpdateCountryInput input, [ScopedService] GeoDbContext context)
+        {
+            var country = await context.Countries.FindAsync(input.Id);
+            country.Name = input.Name;
+            country.Alpha2Code = input.Alpha2Code;
+            country.Alpha3Code = input.Alpha3Code;
+
+            await context.SaveChangesAsync();
+
+            return new UpdateCountryPayload(country);
+        }
     }
 }

@@ -4,7 +4,6 @@ using Geo.Database;
 using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
-using System;
 using System.Threading.Tasks;
 
 namespace Geo.GraphQL.Mutations
@@ -41,6 +40,17 @@ namespace Geo.GraphQL.Mutations
             await context.SaveChangesAsync();
 
             return new ResponseMessagePayload("City deleted");
+        }
+
+        [UseDbContext(typeof(GeoDbContext))]
+        public async Task<UpdateCityPayload> UpdateCityAsync(UpdateCityInput input, [ScopedService] GeoDbContext context)
+        {
+            var city = await context.Cities.FindAsync(input.Id);
+            city.Name = input.Name;
+            
+            await context.SaveChangesAsync();
+
+            return new UpdateCityPayload(city);
         }
     }
 }
