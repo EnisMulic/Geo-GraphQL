@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Geo.Domain;
 
 namespace Geo.Contracts.Payloads
 {
-    class UpdateCountryPayload
-    {
-    }
+    public record UpdateCountryPayload(Country Country);
 }
