@@ -1,15 +1,19 @@
+using Geo.Core.Settings;
 using Geo.Database;
 using Geo.GraphQL.Mutations;
 using Geo.GraphQL.Queries;
 using Geo.GraphQL.Subscriptions;
 using Geo.GraphQL.Types;
 using GraphQL.Server.Ui.Voyager;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Geo.GraphQL
 {
@@ -29,6 +33,33 @@ namespace Geo.GraphQL
             services.AddPooledDbContextFactory<GeoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("GeoDatabase")));
 
+            var jwtSettings = new JwtSettings();
+            Configuration.Bind(nameof(jwtSettings), jwtSettings);
+            services.AddSingleton(jwtSettings);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                RequireExpirationTime = false,
+                ValidateLifetime = true
+            };
+
+            services.AddSingleton(tokenValidationParameters);
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = tokenValidationParameters;
+            });
+
+
             services.AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
                     .AddTypeExtension<CityQueries>()
@@ -36,6 +67,7 @@ namespace Geo.GraphQL
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<CityMutations>()
                     .AddTypeExtension<CountryMutations>()
+                    .AddTypeExtension<AuthMutations>()
                 .AddSubscriptionType(d => d.Name("Subscription"))
                     .AddTypeExtension<CountrySubscriptions>()
                 .AddType<CountryType>()
