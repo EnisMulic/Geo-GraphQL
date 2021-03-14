@@ -74,6 +74,7 @@ namespace Geo.GraphQL
                 .AddType<CityType>()
                 .AddFiltering()
                 .AddSorting()
+                .AddAuthorization()
                 .AddInMemorySubscriptions();
         }
 
@@ -84,6 +85,8 @@ namespace Geo.GraphQL
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseWebSockets();
             app.UseRouting();

@@ -2,6 +2,7 @@
 using Geo.Contracts.Payloads;
 using Geo.Database;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Geo.GraphQL.Mutations
     public class CityMutations
     {
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<AddCityPayload> AddCityAsync(AddCityInput input, [ScopedService] GeoDbContext context)
         {
             var city = new Domain.City
@@ -27,6 +29,7 @@ namespace Geo.GraphQL.Mutations
         }
 
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<ResponseMessagePayload> DeleteCityAsync(DeleteCityInput input, [ScopedService] GeoDbContext context)
         {
             var city = await context.Cities.FindAsync(input.Id);
@@ -43,6 +46,7 @@ namespace Geo.GraphQL.Mutations
         }
 
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<UpdateCityPayload> UpdateCityAsync(UpdateCityInput input, [ScopedService] GeoDbContext context)
         {
             var city = await context.Cities.FindAsync(input.Id);
