@@ -13,6 +13,7 @@ namespace Geo.Database
 
         public DbSet<Country> Countries { get ; set ; }
         public DbSet<City> Cities { get ; set ; }
+        public DbSet<User> Users { get ; set ; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

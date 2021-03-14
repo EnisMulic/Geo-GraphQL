@@ -7,5 +7,6 @@ namespace Geo.Core
     {
         DbSet<City> Cities { get; set; }
         DbSet<Country> Countries { get; set; }
+        DbSet<User> Users { get; set; }
     }
 }
