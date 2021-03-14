@@ -3,6 +3,7 @@ using Geo.Contracts.Payloads;
 using Geo.Database;
 using Geo.GraphQL.Subscriptions;
 using HotChocolate;
+using HotChocolate.AspNetCore.Authorization;
 using HotChocolate.Data;
 using HotChocolate.Subscriptions;
 using HotChocolate.Types;
@@ -15,6 +16,7 @@ namespace Geo.GraphQL.Mutations
     public class CountryMutations
     {
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<AddCountryPayload> AddCountryAsync(
             AddCountryInput input,
             [ScopedService] GeoDbContext context,
@@ -37,6 +39,7 @@ namespace Geo.GraphQL.Mutations
         }
 
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<ResponseMessagePayload> DeleteCountryAsync(DeleteCountryInput input, [ScopedService] GeoDbContext context)
         {
             var country = await context.Countries.FindAsync(input.Id);
@@ -53,6 +56,7 @@ namespace Geo.GraphQL.Mutations
         }
 
         [UseDbContext(typeof(GeoDbContext))]
+        [Authorize]
         public async Task<UpdateCountryPayload> UpdateCountryAsync(UpdateCountryInput input, [ScopedService] GeoDbContext context)
         {
             var country = await context.Countries.FindAsync(input.Id);
