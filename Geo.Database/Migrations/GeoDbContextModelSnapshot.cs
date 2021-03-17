@@ -3,8 +3,8 @@ using System;
 using Geo.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Geo.Database.Migrations
 {
@@ -15,21 +15,21 @@ namespace Geo.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.4")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Geo.Domain.City", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -40,26 +40,26 @@ namespace Geo.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bda0a07a-2d45-4d93-931c-698bbb622e37"),
-                            CountryId = new Guid("10796249-1f5e-4886-afee-840d49d1aa09"),
+                            Id = new Guid("f4881069-cda3-4090-af04-59e14b02c79b"),
+                            CountryId = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Name = "Sarajevo"
                         },
                         new
                         {
-                            Id = new Guid("8501575d-7817-4771-abee-c32bf61ef676"),
-                            CountryId = new Guid("10796249-1f5e-4886-afee-840d49d1aa09"),
+                            Id = new Guid("5270ad72-e141-49d5-b431-316a11ebd821"),
+                            CountryId = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Name = "Mostar"
                         },
                         new
                         {
-                            Id = new Guid("3048319e-4a08-4ff3-a444-8a61a48b8525"),
-                            CountryId = new Guid("00109d9d-5e5b-43d4-8b2c-ba529d90933e"),
+                            Id = new Guid("1dd4170a-af2a-46be-adba-5adf1431bc67"),
+                            CountryId = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Name = "Zagreb"
                         },
                         new
                         {
-                            Id = new Guid("be1099eb-403a-4684-97fc-4932d65b0e92"),
-                            CountryId = new Guid("00109d9d-5e5b-43d4-8b2c-ba529d90933e"),
+                            Id = new Guid("3b68e94c-f2df-4a3a-bc4e-f2daa23c3e73"),
+                            CountryId = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Name = "Split"
                         });
                 });
@@ -68,16 +68,16 @@ namespace Geo.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Alpha2Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Alpha3Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -86,13 +86,13 @@ namespace Geo.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("10796249-1f5e-4886-afee-840d49d1aa09"),
+                            Id = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Alpha2Code = "BA",
                             Name = "Bosnia and Herzegovina"
                         },
                         new
                         {
-                            Id = new Guid("00109d9d-5e5b-43d4-8b2c-ba529d90933e"),
+                            Id = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Alpha2Code = "HR",
                             Name = "Country"
                         });
@@ -102,16 +102,16 @@ namespace Geo.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Hash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

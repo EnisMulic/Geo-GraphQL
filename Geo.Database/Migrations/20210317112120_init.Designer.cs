@@ -3,35 +3,35 @@ using System;
 using Geo.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Geo.Database.Migrations
 {
     [DbContext(typeof(GeoDbContext))]
-    [Migration("20210313131143_addAlphaCodesCountry")]
-    partial class addAlphaCodesCountry
+    [Migration("20210317112120_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.4")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Geo.Domain.City", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -42,26 +42,26 @@ namespace Geo.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("88ba9053-c75d-4c0b-988e-373c08da106b"),
-                            CountryId = new Guid("369dcb64-6669-41b2-a711-90f0b875e63e"),
+                            Id = new Guid("f4881069-cda3-4090-af04-59e14b02c79b"),
+                            CountryId = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Name = "Sarajevo"
                         },
                         new
                         {
-                            Id = new Guid("a51f4a7e-1de3-49ab-b323-fc58d835ba73"),
-                            CountryId = new Guid("369dcb64-6669-41b2-a711-90f0b875e63e"),
+                            Id = new Guid("5270ad72-e141-49d5-b431-316a11ebd821"),
+                            CountryId = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Name = "Mostar"
                         },
                         new
                         {
-                            Id = new Guid("a4a5a468-9003-46ed-a60d-8023a10292f7"),
-                            CountryId = new Guid("9c148912-ed05-4938-bc53-2db73e62661d"),
+                            Id = new Guid("1dd4170a-af2a-46be-adba-5adf1431bc67"),
+                            CountryId = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Name = "Zagreb"
                         },
                         new
                         {
-                            Id = new Guid("247bf3a3-965c-433b-bf44-8b6e7610dfc4"),
-                            CountryId = new Guid("9c148912-ed05-4938-bc53-2db73e62661d"),
+                            Id = new Guid("3b68e94c-f2df-4a3a-bc4e-f2daa23c3e73"),
+                            CountryId = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Name = "Split"
                         });
                 });
@@ -70,16 +70,16 @@ namespace Geo.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Alpha2Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Alpha3Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -88,16 +88,36 @@ namespace Geo.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("369dcb64-6669-41b2-a711-90f0b875e63e"),
+                            Id = new Guid("4271dbda-c486-4bb9-9394-87e84cd117c3"),
                             Alpha2Code = "BA",
                             Name = "Bosnia and Herzegovina"
                         },
                         new
                         {
-                            Id = new Guid("9c148912-ed05-4938-bc53-2db73e62661d"),
+                            Id = new Guid("2bc11ff0-30e6-4fc8-a5f5-4232dd173964"),
                             Alpha2Code = "HR",
                             Name = "Country"
                         });
+                });
+
+            modelBuilder.Entity("Geo.Domain.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Hash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Geo.Domain.City", b =>

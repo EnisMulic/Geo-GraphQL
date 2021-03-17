@@ -31,7 +31,7 @@ namespace Geo.GraphQL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPooledDbContextFactory<GeoDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("GeoDatabase")));
+                options.UseNpgsql(Configuration.GetConnectionString("GeoDatabase")));
 
             var jwtSettings = new JwtSettings();
             Configuration.Bind(nameof(jwtSettings), jwtSettings);
