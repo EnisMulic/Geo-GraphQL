@@ -30,7 +30,13 @@ namespace Geo.GraphQL
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options => 
+                options.AddDefaultPolicy(builder =>
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                )
+            );
 
             services.AddPooledDbContextFactory<GeoDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("GeoDatabase")));
@@ -88,6 +94,7 @@ namespace Geo.GraphQL
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors();
             app.UseAuthentication();
 
             app.UseWebSockets();
